@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NorthwindData.Services
 {
-    class CustomerService : ICustomerService
+    public class CustomerService : ICustomerService
     {
         private readonly NorthwindContext _context;
 
@@ -22,27 +22,29 @@ namespace NorthwindData.Services
 
         public void CreateCustomer(Customer c)
         {
-            throw new NotImplementedException();
+            _context.Customers.Add(c);
+            _context.SaveChanges();
         }
 
-        public Customer GetCustomerById()
+        public Customer GetCustomerByID(string customerID)
         {
-            throw new NotImplementedException();
+            return _context.Customers.Where(c => c.CustomerId == customerID).FirstOrDefault();
         }
 
-        public List<Customer> GetCustomersList()
+        public List<Customer> GetCustomerList()
         {
-            throw new NotImplementedException();
+            return _context.Customers.ToList();
         }
 
         public void RemoveCustomer(Customer c)
         {
-            throw new NotImplementedException();
+            _context.Customers.Remove(c);
+            _context.SaveChanges();
         }
 
         public void SaveCustomerChanges()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
     }
 }
